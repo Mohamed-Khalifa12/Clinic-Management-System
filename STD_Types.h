@@ -1,7 +1,6 @@
 /*
  *  STD_Types.h
  *
- *  Created on: 11 Aug 2023
  *  Author: ihap
  */
 
