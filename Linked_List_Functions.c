@@ -2,51 +2,71 @@
 #include <stdlib.h>
 #include"STD_Types.h"
 
-// Define the Node structure for a doubly linked list
-typedef struct Node 
+typedef struct Node
 {
-    u32 ID;
+    u32 Data;
     struct Node* prev;
-    struct Node* next;
-} Node;
+    struct Node* Next;
+}Node;
 
-// Function to create a new Node
-static Node* createNode(u32 ID) 
+static Node* createNode(u32 Data)
 {
     Node* newNode = (Node*)malloc(sizeof(Node));
-    
-    newNode->ID = ID;
+
+    newNode->Data = Data;
     newNode->prev = NULL;
-    newNode->next = NULL;
+    newNode->Next = NULL;
+
     return newNode;
 }
 
-// Function to add ID to the end of the list
-void addNode(Node** head, u32 ID) 
+void addNode(Node** head,u32 Data)
 {
-    Node* newNode = createNode(ID);
-
+    Node* newNode = createNode(Data);
     Node* current = *head;
-    while (current->next != NULL) 
+
+    if(*head == NULL)
     {
-        current = current->next;
+        *head = newNode;
+        return;
     }
-    current->next = newNode;
+
+    //Detect Last Node
+    while (current->Next != NULL)
+    {
+        current = current->Next;
+    }
+    current->Next = newNode;
     newNode->prev = current;
+}
+
+Node* searchNode(Node* head,u32 Data)
+{
+    Node* current = head;
+
+    while (current != NULL)
+    {
+        if(current->Data == Data)
+        {
+            return current;
+        }
+
+        current = current->Next;
+    }
+    return NULL;
     
 }
 
-// Function to search for a node with specific ID
-Node* searchNode(Node* head, u32 ID) 
+void PrintList(Node* head)
 {
     Node* current = head;
-    while (current != NULL) 
-    {
-        if (current->ID == ID) {
-            return current;
-        }
-        current = current->next;
-    }
-    return NULL;
-}
 
+    u8 counter=0;
+
+    while (current != NULL)
+    {
+        printf("\nNode(%d): %d \n",counter,current->Data);
+        counter++;
+        current = current->Next;
+    } 
+}

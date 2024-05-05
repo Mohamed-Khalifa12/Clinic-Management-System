@@ -16,7 +16,7 @@ typedef unsigned long long  u64;
 // signed
 typedef signed char          s8;
 typedef signed short int    s16;
-typedef signed long int     u32;
+typedef signed long int     s32;
 typedef signed long long    s64;
 
 // float
